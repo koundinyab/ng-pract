@@ -1,0 +1,106 @@
+<form
+  (submit)="submitLoginForm()"
+  [formGroup]="loginForm"
+  *ngIf="showLoginForm"
+>
+  <label for="userName">User name:</label>
+  <input type="text" name="username" id="userName" formControlName="username" />
+  <div
+    *ngIf="
+      loginForm.get('username')?.dirty &&
+      loginForm.get('username')?.hasError('required')
+    "
+  >
+    Username is required.
+  </div>
+  <div
+    *ngIf="
+      loginForm.get('username')?.dirty &&
+      loginForm.get('username')?.hasError('userNameLength')
+    "
+  >
+    Username cannot be more than 5 characters.
+  </div>
+  <label for="password">Password:</label>
+  <input type="text" name="password" id="password" formControlName="password" />
+  <div
+    *ngIf="
+      loginForm.get('password')?.dirty &&
+      loginForm.get('password')?.hasError('passwordLength')
+    "
+  >
+    Password must be at least 6 characters long.
+  </div>
+  <div
+    *ngIf="
+      loginForm.get('password')?.dirty &&
+      loginForm.get('password')?.hasError('passwordUpperCase')
+    "
+  >
+    Password must include at least one uppercase letter.
+  </div>
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  <button (click)="toggleFormToShow()">Register</button>
+</form>
+
+<form [formGroup]="registrationForm" *ngIf="!showLoginForm">
+  <label for="firstname">First name:</label>
+  <input
+    type="text"
+    name="firstname"
+    id="firstname"
+    formControlName="firstName"
+  />
+  <label for="lastname">Last name:</label>
+  <input type="text" name="lastname" id="lastname" formControlName="lastName" />
+  <label for="username">user name:</label>
+  <input type="text" name="username" id="username" formControlName="userName" />
+  <label for="password">password: </label>
+  <input
+    type="password"
+    name="passwrod"
+    id="password"
+    formControlName="password"
+  />
+  <label for="email">email: </label>
+  <input type="email" name="email" id="email" formControlName="email" />
+  <select name="country" id="country" formControlName="country">
+    <option value="">select a country</option>
+    <option *ngFor="let country of countries" [value]="country.code">
+      {{ country.name }}
+    </option>
+  </select>
+  <label for="terms">Agree to terms and condiions</label>
+  <input type="checkbox" name="terms" id="terms" formControlName="terms" />
+  <label for="gender">Gender</label>
+  <div id="gender">
+    <label for="male">Male</label>
+    <input
+      type="radio"
+      name="gender"
+      id="male"
+      value="male"
+      formControlName="gender"
+    />
+    <label for="female">Female</label>
+    <input
+      type="radio"
+      name="gender"
+      id="female"
+      value="female"
+      formControlName="gender"
+    />
+  </div>
+  <div
+    *ngIf="registrationForm.contains('indiaFields')"
+    formGroupName="indiaFields"
+  >
+    <label for="city">city</label>
+    <input type="text" name="city" id="city" formControlName="city" />
+  </div>
+  <button (click)="toggleFormToShow()">Got to Login</button>
+</form>
+
+<!-- <label for="example">example</label>
+<input type="text" name="example" id="example" [(ngModel)]="checkValue" />
+{{ checkValue }} -->

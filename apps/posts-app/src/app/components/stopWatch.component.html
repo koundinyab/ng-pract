@@ -1,0 +1,10 @@
+<div class="stopwatch">
+  <h2>
+    {{ minutes | number : '2.0' }}:{{ seconds | number : '2.0' }}:{{
+      milliseconds | number : '2.0'
+    }}
+  </h2>
+  <button (click)="start()">Start</button>
+  <button (click)="pause()">Pause</button>
+  <button (click)="reset()">Reset</button>
+</div>

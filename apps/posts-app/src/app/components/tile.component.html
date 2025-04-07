@@ -1,0 +1,11 @@
+<div
+  class="tile-container"
+  (mouseenter)="toggleDeleteBtn()"
+  (mouseleave)="toggleDeleteBtn()"
+>
+  <button (click)="handleDeleteIconClick($event)" *ngIf="showDeleteIcon">
+    X
+  </button>
+  <h3>{{ tileData.title }}</h3>
+  <p>{{ tileData.body }}</p>
+</div>

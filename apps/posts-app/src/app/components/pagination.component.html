@@ -1,0 +1,23 @@
+<div class="posts-container">
+  <ng-container *ngIf="jobs$ | async as jobs; else loading">
+    <div class="post-tile" *ngFor="let job of jobs">
+      {{ job.title }}
+    </div>
+  </ng-container>
+  <ng-template #loading> loading... </ng-template>
+</div>
+<div class="footer">
+  <button (click)="handlePrevBtnClick()" [disabled]="pageNumber === 1">
+    previous
+  </button>
+  <button *ngFor="let page of totalPages; index as i" (click)="goToPage(i)">
+    {{ page }}
+  </button>
+
+  <button
+    (click)="handleNextBtnClick()"
+    [disabled]="((jobIds$ | async)?.length || 0) <= pageNumber * pageSize"
+  >
+    next
+  </button>
+</div>

@@ -1,0 +1,20 @@
+<app-search (searchTerm)="filterPostsBySearch($event)"></app-search>
+<!-- just to see event bubbling div is given click function-->
+<div
+  class="posts-container"
+  (click)="check()"
+  (keypress)="check()"
+  (keydown)="check()"
+  tabindex="0"
+>
+  <ng-container *ngIf="filteredPosts$ | async as posts; else loading">
+    <app-tile
+      *ngFor="let post of posts"
+      [tileData]="post"
+      (deletePost)="deletePost($event)"
+    ></app-tile>
+  </ng-container>
+</div>
+<ng-template #loading>
+  <p>loading...</p>
+</ng-template>

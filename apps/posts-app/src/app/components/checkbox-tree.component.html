@@ -1,0 +1,7 @@
+<div *ngFor="let parent of checkboxData">
+  <label for="">
+    <input type="checkbox" name="checkboxParent" id="checkboxParent" />
+    {{ parent.label }}
+  </label>
+  <ng-container *ngIf="parent.children?.length || 0 > 0"> </ng-container>
+</div>
